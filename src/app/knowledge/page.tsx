@@ -28,8 +28,8 @@ function KnowledgeContent() {
     const container = document.getElementById('header-cta-container')
     if (container && container.children.length === 0) {
       const button = document.createElement('button')
-      button.className = 'bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-2 font-medium transition-colors whitespace-nowrap'
-      button.textContent = 'Request Free 1-on-1 Career Call'
+      button.className = 'bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-2 rounded font-medium transition-colors whitespace-nowrap'
+      button.textContent = 'Request Free Career Call'
       button.onclick = () => setIsLeadFormOpen(true)
       container.appendChild(button)
     }
@@ -268,14 +268,11 @@ function KnowledgeContent() {
             {/* Free Live Class Widget */}
             <div className="bg-white border border-gray-200 overflow-hidden">
               <div className="bg-scaler-blue p-4">
-                <h3 className="font-bold text-white">Free Live Class with Scaler Founders</h3>
+                <h3 className="font-bold text-white text-sm">Free Live Class</h3>
               </div>
               <div className="p-4">
-                <h4 className="font-semibold text-scaler-dark mb-2 text-sm">
-                  Master the Art of Problem Solving
-                </h4>
                 <p className="text-xs text-scaler-gray mb-3">
-                  Join our live interactive session with Scaler founders and learn proven techniques to crack coding interviews at top tech companies.
+                  Join live sessions with Scaler founders and learn proven techniques to crack coding interviews at top companies.
                 </p>
                 <ul className="text-xs text-scaler-gray space-y-2 mb-4">
                   <li className="flex items-center gap-2">
@@ -317,7 +314,7 @@ function KnowledgeContent() {
             {/* Career Roadmap Tool Widget */}
             <div className="bg-white border border-gray-200 overflow-hidden">
               <div className="bg-gradient-to-r from-scaler-dark to-scaler-dark-light p-4">
-                <h3 className="font-bold text-white flex items-center gap-2">
+                <h3 className="font-bold text-white flex items-center gap-2 text-sm">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
@@ -325,19 +322,17 @@ function KnowledgeContent() {
                 </h3>
               </div>
               <div className="p-4">
-                <div className="flex items-start gap-3 mb-3">
-                  <div className="flex-shrink-0 w-12 h-12 bg-scaler-blue/10 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-scaler-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="text-center mb-4">
+                  <div className="w-16 h-16 mx-auto bg-scaler-blue/10 rounded-full flex items-center justify-center mb-3">
+                    <svg className="w-8 h-8 text-scaler-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
-                  <div className="flex-1">
-                    <p className="text-sm text-scaler-gray">
-                      Evaluate your profile and benchmark against your peers. Get insights on your probability of shortlisting at top companies.
-                    </p>
-                  </div>
+                  <p className="text-xs text-scaler-gray">
+                    Benchmark your profile and get shortlisting insights for top companies
+                  </p>
                 </div>
-                <div className="bg-gray-50 p-3 mb-4">
+                <div className="bg-gray-50 p-3 mb-4 text-center">
                   <div className="text-xs text-scaler-gray-light mb-1">Trusted by</div>
                   <div className="text-lg font-bold text-scaler-dark">50,000+</div>
                   <div className="text-xs text-scaler-gray">professionals</div>
@@ -346,7 +341,7 @@ function KnowledgeContent() {
                   href="https://www.scaler.com/career-plan"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-scaler-dark hover:bg-scaler-dark-light text-white text-center py-2 text-sm font-medium transition-colors"
+                  className="block w-full bg-scaler-dark hover:bg-scaler-dark-light text-white text-center py-2 text-sm font-medium transition-colors rounded"
                 >
                   Build Your Roadmap
                 </a>
