@@ -29,7 +29,6 @@ export interface Vote {
 }
 
 export const CATEGORIES: Record<string, string> = {
-  'career': 'All Questions',
   'fees': 'Fees & Investment',
   'placements': 'Placements & Jobs',
   'curriculum': 'Curriculum & Learning',

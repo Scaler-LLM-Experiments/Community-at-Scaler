@@ -24,24 +24,21 @@ export default function RootLayout({
           <div className="max-w-6xl mx-auto px-4 py-4">
             <nav className="flex items-center justify-between">
               <a href="/knowledge" className="flex items-center gap-2">
-                {/* Scaler Logo - Arrow/Graduation Cap */}
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                {/* Scaler Logo */}
+                <svg width="120" height="28" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <text x="0" y="22" fontFamily="Arial, sans-serif" fontSize="22" fontWeight="700" fill="white" letterSpacing="2">SCALER</text>
+                  <path d="M115 8L108 15L115 22" stroke="#FF6B35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <span className="text-xl font-bold tracking-tight">
-                  SCALER
-                </span>
               </a>
               <div className="flex items-center gap-4">
                 <a
-                  href="/knowledge"
-                  className="hover:text-scaler-blue transition-colors"
+                  href="https://www.scaler.com/career-plan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-2 font-medium transition-colors whitespace-nowrap"
                 >
-                  Browse Questions
+                  Request Free 1-on-1 Career Call
                 </a>
-                <button className="bg-scaler-blue hover:bg-scaler-blue-dark px-4 py-2 font-medium transition-colors">
-                  Sign In
-                </button>
               </div>
             </nav>
           </div>

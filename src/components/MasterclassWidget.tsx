@@ -24,8 +24,7 @@ export default function MasterclassWidget() {
   return (
     <div className="fixed bottom-4 right-4 z-40 w-80 bg-scaler-dark shadow-2xl overflow-hidden">
       {/* Header with close/minimize */}
-      <div className="flex items-center justify-between p-3 border-b border-gray-700">
-        <span className="text-xs text-gray-400 uppercase tracking-wide">Attend Masterclass</span>
+      <div className="flex items-center justify-end p-3 border-b border-gray-700">
         <div className="flex gap-2">
           <button
             onClick={() => setIsMinimized(true)}

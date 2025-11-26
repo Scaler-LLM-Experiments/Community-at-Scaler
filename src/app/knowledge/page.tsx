@@ -148,16 +148,6 @@ function KnowledgeContent() {
             <div className="bg-white border border-gray-200 p-4">
               <h3 className="font-semibold text-scaler-dark mb-3">Filter by Topic</h3>
               <div className="space-y-1">
-                <button
-                  onClick={() => handleCategoryChange('')}
-                  className={`w-full text-left px-3 py-2 text-sm transition-colors ${
-                    !selectedCategory
-                      ? 'bg-scaler-blue/10 text-scaler-blue font-medium'
-                      : 'text-scaler-gray hover:bg-gray-100'
-                  }`}
-                >
-                  All Topics
-                </button>
                 {Object.entries(CATEGORIES).map(([key, label]) => (
                   <button
                     key={key}
@@ -208,16 +198,6 @@ function KnowledgeContent() {
                     }`}
                   >
                     Most Votes
-                  </button>
-                  <button
-                    onClick={() => setSortBy('oldest')}
-                    className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-                      sortBy === 'oldest'
-                        ? 'border-scaler-blue text-scaler-blue'
-                        : 'border-transparent text-scaler-gray hover:text-scaler-dark'
-                    }`}
-                  >
-                    Oldest
                   </button>
                 </div>
               </div>
@@ -314,14 +294,14 @@ function KnowledgeContent() {
               </div>
             </div>
 
-            {/* Career Profile Evaluation Widget */}
+            {/* Career Roadmap Tool Widget */}
             <div className="bg-white border border-gray-200 overflow-hidden">
               <div className="bg-gradient-to-r from-scaler-dark to-scaler-dark-light p-4">
-                <h3 className="font-bold text-white">Career Profile Evaluation</h3>
+                <h3 className="font-bold text-white">Career Roadmap Tool</h3>
               </div>
               <div className="p-4">
                 <p className="text-sm text-scaler-gray mb-3">
-                  Get a personalized report on your career trajectory and salary potential
+                  Evaluate your profile and benchmark against your peers. Get insights on your probability of shortlisting at top companies.
                 </p>
                 <div className="bg-gray-50 p-3 mb-4">
                   <div className="text-xs text-scaler-gray-light mb-1">Trusted by</div>
@@ -334,7 +314,7 @@ function KnowledgeContent() {
                   rel="noopener noreferrer"
                   className="block w-full bg-scaler-dark hover:bg-scaler-dark-light text-white text-center py-2 text-sm font-medium transition-colors"
                 >
-                  Get Free Evaluation
+                  Build Your Roadmap
                 </a>
               </div>
             </div>
