@@ -2,7 +2,7 @@ export interface Question {
   _id: string
   title: string
   slug: string
-  body?: any[]
+  body?: string | any[]
   category: string
   tags: string[]
   answer?: Answer
@@ -13,7 +13,7 @@ export interface Question {
 }
 
 export interface Answer {
-  body: any[]
+  body: string | any[]
   resources?: Resource[]
 }
 
