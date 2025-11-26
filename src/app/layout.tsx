@@ -25,20 +25,15 @@ export default function RootLayout({
             <nav className="flex items-center justify-between">
               <a href="/knowledge" className="flex items-center gap-2">
                 {/* Scaler Logo */}
-                <svg width="120" height="28" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <text x="0" y="22" fontFamily="Arial, sans-serif" fontSize="22" fontWeight="700" fill="white" letterSpacing="2">SCALER</text>
-                  <path d="M115 8L108 15L115 22" stroke="#FF6B35" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <text x="0" y="24" fontFamily="Arial, Helvetica, sans-serif" fontSize="24" fontWeight="700" fill="white" letterSpacing="3">SCALER</text>
+                  <g transform="translate(128, 8)">
+                    <path d="M0 0 L6 8 L0 16" stroke="none" fill="#FF6B35"/>
+                  </g>
                 </svg>
               </a>
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://www.scaler.com/career-plan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-2 font-medium transition-colors whitespace-nowrap"
-                >
-                  Request Free 1-on-1 Career Call
-                </a>
+              <div className="flex items-center gap-4" id="header-cta-container">
+                {/* This will be handled by the page component */}
               </div>
             </nav>
           </div>
