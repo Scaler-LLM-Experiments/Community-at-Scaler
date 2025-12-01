@@ -75,7 +75,7 @@ export default function QuestionCard({ question, compact = false }: QuestionCard
 
   return (
     <Link
-      href={`/knowledge/${question.category}/${question.slug}`}
+      href={`/scaler-knowledge-hub/${question.category}/${question.slug}`}
       className="block bg-white border border-gray-200 hover:border-scaler-blue hover:shadow-md transition-all duration-200"
     >
       {content}

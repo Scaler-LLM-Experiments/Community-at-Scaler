@@ -15,7 +15,7 @@ export default function CategoryFilter() {
     } else {
       params.delete('category')
     }
-    router.push(`/knowledge?${params.toString()}`)
+    router.push(`/scaler-knowledge-hub?${params.toString()}`)
   }
 
   return (

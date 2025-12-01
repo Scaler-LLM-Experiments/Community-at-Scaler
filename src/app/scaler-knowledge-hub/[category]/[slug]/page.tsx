@@ -26,7 +26,7 @@ export default function QuestionDetailPage() {
             The question you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link
-            href="/knowledge"
+            href="/scaler-knowledge-hub"
             className="text-scaler-blue hover:text-scaler-blue-dark font-medium"
           >
             ← Back to Knowledge Hub
@@ -44,7 +44,7 @@ export default function QuestionDetailPage() {
           <ol className="flex items-center gap-2 text-scaler-gray">
             <li>
               <Link
-                href="/knowledge"
+                href="/scaler-knowledge-hub"
                 className="hover:text-scaler-blue transition-colors"
               >
                 Knowledge Hub
@@ -53,7 +53,7 @@ export default function QuestionDetailPage() {
             <li>/</li>
             <li>
               <Link
-                href={`/knowledge?category=${question.category}`}
+                href={`/scaler-knowledge-hub?category=${question.category}`}
                 className="hover:text-scaler-blue transition-colors"
               >
                 {CATEGORIES[question.category] || question.category}
@@ -229,7 +229,7 @@ export default function QuestionDetailPage() {
         {/* Back Link */}
         <div className="mt-6">
           <Link
-            href="/knowledge"
+            href="/scaler-knowledge-hub"
             className="text-scaler-blue hover:text-scaler-blue-dark font-medium flex items-center gap-2"
           >
             <svg
