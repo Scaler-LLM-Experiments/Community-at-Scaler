@@ -18,7 +18,7 @@ export default function SearchBar() {
       }
       // Keep other params like category
       params.delete('q') // Remove question param when searching
-      const newUrl = params.toString() ? `/scaler-knowledge-hub?${params.toString()}` : '/scaler-knowledge-hub'
+      const newUrl = params.toString() ? `/?${params.toString()}` : '/'
       router.push(newUrl)
     }, 300)
 
