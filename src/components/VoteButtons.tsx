@@ -4,19 +4,23 @@ import { useState } from 'react'
 
 interface VoteButtonsProps {
   questionId: string
-  initialUpvotes: number
-  initialDownvotes: number
+  upvotes?: number
+  downvotes?: number
+  initialUpvotes?: number
+  initialDownvotes?: number
   userVote?: 'up' | 'down' | null
 }
 
 export default function VoteButtons({
   questionId,
+  upvotes: propUpvotes,
+  downvotes: propDownvotes,
   initialUpvotes,
   initialDownvotes,
   userVote: initialUserVote,
 }: VoteButtonsProps) {
-  const [upvotes, setUpvotes] = useState(initialUpvotes)
-  const [downvotes, setDownvotes] = useState(initialDownvotes)
+  const [upvotes, setUpvotes] = useState(propUpvotes || initialUpvotes || 0)
+  const [downvotes, setDownvotes] = useState(propDownvotes || initialDownvotes || 0)
   const [userVote, setUserVote] = useState<'up' | 'down' | null>(initialUserVote || null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -82,21 +86,21 @@ export default function VoteButtons({
     }
   }
 
-  const netVotes = upvotes - downvotes
+  const netVotes = (upvotes || 0) - (downvotes || 0)
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-0.5 sm:gap-1">
       <button
         onClick={() => handleVote('up')}
         disabled={isLoading}
-        className={`vote-btn p-2 ${
+        className={`vote-btn p-1.5 sm:p-2 rounded-lg transition-colors ${
           userVote === 'up'
             ? 'bg-green-100 text-green-600'
             : 'hover:bg-gray-100 text-scaler-gray'
         } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label="Upvote"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -107,7 +111,7 @@ export default function VoteButtons({
       </button>
 
       <span
-        className={`text-xl font-bold ${
+        className={`text-base sm:text-xl font-bold ${
           netVotes > 0
             ? 'text-green-600'
             : netVotes < 0
@@ -121,14 +125,14 @@ export default function VoteButtons({
       <button
         onClick={() => handleVote('down')}
         disabled={isLoading}
-        className={`vote-btn p-2 ${
+        className={`vote-btn p-1.5 sm:p-2 rounded-lg transition-colors ${
           userVote === 'down'
             ? 'bg-red-100 text-red-500'
             : 'hover:bg-gray-100 text-scaler-gray'
         } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label="Downvote"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"

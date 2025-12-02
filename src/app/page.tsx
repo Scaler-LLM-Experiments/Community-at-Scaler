@@ -2,21 +2,25 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import SearchBar from '@/components/SearchBar'
 import QuestionCard from '@/components/QuestionCard'
 import QuestionModal from '@/components/QuestionModal'
 import LeadFormModal from '@/components/LeadFormModal'
 import { Question, CATEGORIES } from '@/lib/types'
-import { fetchQuestionsFromSheet } from '@/lib/sheets'
 
 type SortOption = 'newest' | 'votes' | 'oldest'
 
-function KnowledgeContent() {
+interface KnowledgeContentProps {
+  initialQuestions: Question[]
+}
+
+function KnowledgeContent({ initialQuestions }: KnowledgeContentProps) {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const [allQuestions, setAllQuestions] = useState<Question[]>([])
-  const [questions, setQuestions] = useState<Question[]>([])
-  const [loading, setLoading] = useState(true)
+  const [allQuestions] = useState<Question[]>(initialQuestions)
+  const [questions, setQuestions] = useState<Question[]>(initialQuestions)
+  const [loading, setLoading] = useState(false)
   const [sortBy, setSortBy] = useState<SortOption>('newest')
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null)
@@ -28,20 +32,11 @@ function KnowledgeContent() {
     const container = document.getElementById('header-cta-container')
     if (container && container.children.length === 0) {
       const button = document.createElement('button')
-      button.className = 'bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-2 rounded font-medium transition-colors whitespace-nowrap'
+      button.className = 'bg-scaler-blue hover:bg-scaler-blue-dark text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm md:text-base font-medium transition-colors flex-shrink-0'
       button.textContent = 'Request Free 1:1 Career Call'
       button.onclick = () => setIsLeadFormOpen(true)
       container.appendChild(button)
     }
-  }, [])
-
-  // Fetch questions from Google Sheets on mount
-  useEffect(() => {
-    async function loadQuestions() {
-      const data = await fetchQuestionsFromSheet()
-      setAllQuestions(data)
-    }
-    loadQuestions()
   }, [])
 
   // Check for question in URL on mount
@@ -74,8 +69,9 @@ function KnowledgeContent() {
     }
 
     if (category) {
-      // Filter by tags instead of category
+      // Filter by category field OR tags
       filtered = filtered.filter((q) =>
+        q.category.toLowerCase() === category.toLowerCase() ||
         q.tags.some(tag => tag.toLowerCase() === category.toLowerCase())
       )
     }
@@ -95,13 +91,7 @@ function KnowledgeContent() {
       )
     }
 
-    setLoading(true)
-    const timer = setTimeout(() => {
-      setQuestions(filtered)
-      setLoading(false)
-    }, 200)
-
-    return () => clearTimeout(timer)
+    setQuestions(filtered)
   }, [searchParams, sortBy, allQuestions])
 
   const handleCategoryChange = (category: string) => {
@@ -111,7 +101,8 @@ function KnowledgeContent() {
     } else {
       params.delete('category')
     }
-    router.push(`/knowledge?${params.toString()}`)
+    const url = params.toString() ? `?${params.toString()}` : ''
+    router.push(`/${url}`)
   }
 
   const handleQuestionClick = (question: Question) => {
@@ -120,7 +111,7 @@ function KnowledgeContent() {
     // Update URL for SEO without navigation
     const params = new URLSearchParams(searchParams.toString())
     params.set('q', question.slug)
-    window.history.pushState({}, '', `/knowledge?${params.toString()}`)
+    window.history.pushState({}, '', `/?${params.toString()}`)
   }
 
   const handleCloseModal = () => {
@@ -129,17 +120,17 @@ function KnowledgeContent() {
     // Remove question from URL
     const params = new URLSearchParams(searchParams.toString())
     params.delete('q')
-    const newUrl = params.toString() ? `/knowledge?${params.toString()}` : '/knowledge'
+    const newUrl = params.toString() ? `/?${params.toString()}` : '/'
     window.history.pushState({}, '', newUrl)
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div className="bg-gray-50 min-h-screen pb-20 lg:pb-0">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
 
-          {/* Left Sidebar */}
-          <aside className="lg:col-span-3 space-y-6">
+          {/* Left Sidebar - Hidden on mobile, collapsible */}
+          <aside className="hidden lg:block lg:col-span-3 space-y-6">
             {/* Community Info */}
             <div className="bg-white border border-gray-200 p-4">
               <h3 className="font-semibold text-scaler-dark mb-3">About Scaler Knowledge Hub</h3>
@@ -149,7 +140,7 @@ function KnowledgeContent() {
               <div className="text-sm text-scaler-gray-light">
                 <div className="flex justify-between mb-2">
                   <span>Questions</span>
-                  <span className="font-medium text-scaler-dark">{allQuestions.length}</span>
+                  <span className="font-medium text-scaler-dark">{allQuestions?.length || 0}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Categories</span>
@@ -208,21 +199,37 @@ function KnowledgeContent() {
 
           {/* Main Content */}
           <main className="lg:col-span-6">
+            {/* Mobile Category Filter */}
+            <div className="lg:hidden mb-4">
+              <select
+                value={selectedCategory}
+                onChange={(e) => handleCategoryChange(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-sm focus:outline-none focus:ring-2 focus:ring-scaler-blue"
+              >
+                <option value="">All Questions</option>
+                {Object.entries(CATEGORIES).map(([key, label]) => (
+                  <option key={key} value={key}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             {/* Search Bar */}
             <div className="mb-4">
               <SearchBar />
             </div>
 
             {/* StackOverflow-style Filter Tabs */}
-            <div className="bg-white border border-gray-200 mb-4">
-              <div className="flex items-center justify-between p-3 border-b border-gray-200">
-                <h2 className="font-semibold text-scaler-dark">
+            <div className="bg-white border border-gray-200 mb-4 rounded-lg lg:rounded-none overflow-hidden">
+              <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200">
+                <h2 className="font-semibold text-scaler-dark text-sm sm:text-base">
                   {questions.length} Question{questions.length !== 1 ? 's' : ''}
                 </h2>
                 <div className="flex">
                   <button
                     onClick={() => setSortBy('newest')}
-                    className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    className={`px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${
                       sortBy === 'newest'
                         ? 'border-scaler-blue text-scaler-blue'
                         : 'border-transparent text-scaler-gray hover:text-scaler-dark'
@@ -232,13 +239,13 @@ function KnowledgeContent() {
                   </button>
                   <button
                     onClick={() => setSortBy('votes')}
-                    className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    className={`px-2 sm:px-4 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${
                       sortBy === 'votes'
                         ? 'border-scaler-blue text-scaler-blue'
                         : 'border-transparent text-scaler-gray hover:text-scaler-dark'
                     }`}
                   >
-                    Most Votes
+                    Votes
                   </button>
                 </div>
               </div>
@@ -257,13 +264,13 @@ function KnowledgeContent() {
               ) : questions.length > 0 ? (
                 <div className="divide-y divide-gray-200">
                   {questions.map((question) => (
-                    <div
+                    <Link
                       key={question._id}
-                      onClick={() => handleQuestionClick(question)}
-                      className="cursor-pointer"
+                      href={`/questions/${question.slug}`}
+                      className="block hover:bg-gray-50 transition-colors"
                     >
                       <QuestionCard question={question} compact />
-                    </div>
+                    </Link>
                   ))}
                 </div>
               ) : (
@@ -279,22 +286,22 @@ function KnowledgeContent() {
             </div>
 
             {/* Bottom CTA */}
-            <div className="bg-scaler-dark text-white p-6 text-center">
-              <h3 className="text-xl font-bold mb-2">Want to level up your career?</h3>
-              <p className="text-scaler-gray-light mb-4">
+            <div className="bg-scaler-dark text-white p-4 sm:p-6 text-center rounded-lg lg:rounded-none mt-6">
+              <h3 className="text-lg sm:text-xl font-bold mb-2">Want to level up your career?</h3>
+              <p className="text-scaler-gray-light mb-4 text-sm sm:text-base">
                 Join 500,000+ learners who transformed their careers with Scaler
               </p>
               <button
                 onClick={() => setIsLeadFormOpen(true)}
-                className="inline-block bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-3 font-medium transition-colors"
+                className="inline-block bg-scaler-blue hover:bg-scaler-blue-dark px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-medium transition-colors rounded-lg"
               >
                 Know More About Scaler
               </button>
             </div>
           </main>
 
-          {/* Right Sidebar - Lead Magnets */}
-          <aside className="lg:col-span-3 space-y-6">
+          {/* Right Sidebar - Hidden on mobile */}
+          <aside className="hidden lg:block lg:col-span-3 space-y-6">
             {/* Free Live Class Widget */}
             <div className="bg-white border border-gray-200 overflow-hidden">
               <div className="bg-scaler-blue p-4">
@@ -393,14 +400,34 @@ function KnowledgeContent() {
       {isLeadFormOpen && (
         <LeadFormModal onClose={() => setIsLeadFormOpen(false)} />
       )}
+
+      {/* Sticky Bottom CTA Bar - Mobile Only */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-scaler-blue shadow-2xl z-50">
+        <div className="px-3 py-2.5 flex items-center justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-bold text-scaler-dark truncate">Need Career Guidance?</p>
+            <p className="text-[10px] text-scaler-gray truncate">Talk to experts for free</p>
+          </div>
+          <button
+            onClick={() => setIsLeadFormOpen(true)}
+            className="flex-shrink-0 bg-scaler-blue hover:bg-scaler-blue-dark text-white px-4 py-2 rounded-lg text-xs font-bold transition-colors shadow-md"
+          >
+            Book Call
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
 
-export default function KnowledgePage() {
+export default async function KnowledgePage() {
+  // Fetch questions on server-side
+  const { fetchQuestionsFromSheet } = await import('@/lib/sheets')
+  const questions = await fetchQuestionsFromSheet()
+
   return (
     <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>}>
-      <KnowledgeContent />
+      <KnowledgeContent initialQuestions={questions} />
     </Suspense>
   )
 }

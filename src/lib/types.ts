@@ -35,4 +35,8 @@ export const CATEGORIES: Record<string, string> = {
   'reviews': 'Reviews & Testimonials',
   'eligibility': 'Eligibility & Requirements',
   'comparison': 'Comparisons',
+  'learning-experience': 'Learning Experience',
+  'community': 'Community & Networking',
+  'platform': 'Platform & Tools',
+  'support': 'Support & Mentorship',
 }

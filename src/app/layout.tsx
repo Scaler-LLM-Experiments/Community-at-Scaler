@@ -3,13 +3,25 @@ import Link from 'next/link'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Scaler Knowledge Hub',
-  description: 'A curated Q&A knowledge base for developers. Find answers to programming, system design, and interview questions.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title: {
+    default: 'Scaler Knowledge Hub - Honest Answers About Scaler Academy',
+    template: '%s | Scaler Knowledge Hub',
+  },
+  description: 'Get honest answers about Scaler Academy - fees, placements, salary hikes, reviews, ISA vs upfront payment, and more. 35+ detailed Q&As from real experiences covering curriculum, mentors, and ROI.',
+  keywords: ['Scaler Academy', 'Scaler fees', 'Scaler placement', 'Scaler reviews', 'coding bootcamp India', 'MAANG interview prep', 'ISA bootcamp', 'Scaler worth it', 'Scaler salary hike'],
+  authors: [{ name: 'Scaler Knowledge Hub' }],
   openGraph: {
-    title: 'Scaler Knowledge Hub',
-    description: 'A curated Q&A knowledge base for developers',
+    title: 'Scaler Knowledge Hub - Honest Answers About Scaler Academy',
+    description: 'Get honest answers about Scaler Academy fees, placements, and reviews. 35+ detailed Q&As from real experiences.',
     siteName: 'Scaler Knowledge Hub',
     type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Scaler Knowledge Hub - Honest Answers About Scaler Academy',
+    description: 'Get honest answers about Scaler Academy fees, placements, and reviews.',
   },
 }
 
@@ -20,13 +32,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "uf78vaz0kk");
+            `,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
-        <header className="bg-black text-white">
-          <div className="max-w-6xl mx-auto px-4 py-4">
+        <header className="bg-black text-white sticky top-0 z-50 shadow-md">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4">
             <nav className="flex items-center justify-between">
-              <Link href="/" className="flex items-center">
+              <Link href="/" className="flex items-center flex-shrink-0">
                 {/* Scaler Logo */}
-                <svg width="120" height="26" viewBox="0 0 1324 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-20 h-5 sm:w-28 sm:h-6" viewBox="0 0 1324 280" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1147.8 228.928C1147.58 228.163 1147.43 227.38 1147.35 226.588C1147.35 195.638 1147.35 164.685 1147.35 133.728C1147.35 132.188 1147.27 130.638 1147.35 129.107C1147.48 127.177 1148.36 125.377 1149.81 124.096C1156.13 117.876 1162.49 111.695 1168.78 105.436C1181.25 92.9706 1193.71 80.4789 1206.15 67.9611C1210.83 63.2881 1215.52 58.6475 1220.23 54.0395C1220.93 53.4591 1221.68 52.9374 1222.46 52.4796H1323.1C1323.4 53.2759 1323.6 54.1037 1323.7 54.9461C1323.7 86.3121 1323.7 117.671 1323.7 149.024C1323.74 149.682 1323.84 150.334 1324 150.974V154.065C1322.96 155.235 1321.97 156.463 1320.87 157.574C1316.55 161.929 1312.22 166.264 1307.87 170.58C1302.33 176.049 1296.72 181.45 1291.21 186.938C1278.13 199.976 1265.07 213.024 1252.02 226.081C1251.05 227.114 1249.84 228.031 1248.75 229.006L1147.8 228.928ZM1249.37 217.901L1250.1 218.418C1252.18 216.127 1254.17 213.739 1256.34 211.545C1265.13 202.738 1273.95 193.964 1282.79 185.223C1283.28 184.772 1283.66 184.221 1283.91 183.608C1284.15 182.995 1284.27 182.335 1284.23 181.674C1284.19 152.992 1284.19 124.314 1284.23 95.6386C1284.23 95.3267 1284.23 95.0147 1284.23 94.6637C1284.29 93.2599 1283.87 92.6164 1282.22 92.6164C1253.22 92.6749 1224.22 92.6749 1195.22 92.6164C1194.55 92.5983 1193.89 92.7219 1193.27 92.979C1192.66 93.2362 1192.1 93.621 1191.65 94.108C1181.29 104.507 1170.93 114.867 1160.57 125.188C1160.23 125.529 1159.92 125.909 1159.35 126.553H1249.4L1249.37 217.901ZM1219.15 177.394V159.592C1219.15 157.067 1219.05 156.96 1216.57 156.96H1181.12C1180.65 156.96 1180.14 157.019 1179.72 156.96C1178.26 156.96 1177.77 157.662 1177.77 159.076C1177.81 171.255 1177.81 183.429 1177.77 195.596C1177.77 197.136 1178.41 197.789 1179.86 197.76C1181.66 197.76 1183.46 197.623 1185.26 197.623C1195.9 197.623 1206.53 197.623 1217.16 197.623C1219.11 197.623 1219.11 197.623 1219.11 195.615C1219.11 189.532 1219.11 183.445 1219.11 177.355" fill="white"/>
                   <path d="M52.9678 99.3528C52.9678 107.503 58.2908 112.095 90.0142 117.778H90.0337C153.305 129.136 165.979 148.166 165.979 175.2C165.979 191.725 158.014 230.185 84.272 230.185C56.4483 230.185 8.5902 222.941 0.430245 174.459L0.0402832 172.139H44.9541L45.4026 173.504C50.6476 189.288 63.8185 196.327 88.1132 196.327C116.707 196.327 120.012 186.655 120.012 179.383C120.012 169.292 113.548 163.073 78.2374 157.077C15.8337 146.402 7.23508 124.934 7.23508 103.33C7.23508 71.1293 36.4627 50.3151 81.708 50.3151C149.142 50.3151 158.228 89.5745 159.427 101.605L159.642 103.789H114.855L114.436 102.346C111.881 93.3669 105.837 84.2027 80.4407 84.2027C67.9034 84.2027 52.9678 86.8252 52.9678 99.3528Z" fill="white"/>
                   <path fillRule="evenodd" clipRule="evenodd" d="M500.332 228.927H551.115L484.841 52.411H425.732L359.176 228.927H408.808L422.291 189.083H487.132L500.332 228.927ZM454.716 86.3864L477.958 157.759H431.474L454.716 86.3864Z" fill="white"/>
@@ -45,9 +70,9 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
-        <footer className="bg-scaler-dark text-white py-8">
-          <div className="max-w-6xl mx-auto px-4 text-center">
-            <p className="text-scaler-gray-light">
+        <footer className="bg-scaler-dark text-white py-6 sm:py-8">
+          <div className="max-w-6xl mx-auto px-3 sm:px-4 text-center">
+            <p className="text-scaler-gray-light text-xs sm:text-sm">
               © {new Date().getFullYear()} Scaler Knowledge Hub. All rights reserved.
             </p>
           </div>

@@ -32,10 +32,10 @@ export default function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search questions..."
-        className="w-full px-4 py-3 pl-12 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-scaler-blue focus:border-transparent transition-all"
+        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 pl-10 sm:pl-12 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-scaler-blue focus:border-transparent transition-all text-sm sm:text-base"
       />
       <svg
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-scaler-gray-light"
+        className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-scaler-gray-light"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

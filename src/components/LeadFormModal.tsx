@@ -62,20 +62,20 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative min-h-screen flex items-center justify-center p-4">
-        <div className="relative bg-white w-full max-w-4xl shadow-xl flex overflow-hidden">
+      <div className="relative min-h-screen flex items-center justify-center p-2 sm:p-4">
+        <div className="relative bg-white w-full max-w-md shadow-xl rounded-lg overflow-hidden">
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-10"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 transition-colors z-10 p-1 hover:bg-gray-100 rounded-full"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
-          {/* Left Side - Infographic with Blue Gradient */}
-          <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-blue-900 via-blue-700 to-blue-600 p-8 flex-col justify-center relative overflow-hidden">
+          {/* Left Side - Infographic REMOVED */}
+          <div className="hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute top-10 left-10 w-32 h-32 border-2 border-white rounded-full"></div>
@@ -151,35 +151,35 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
             </div>
           </div>
 
-          {/* Right Side - Form or Success Message */}
-          <div className="w-full md:w-1/2 p-8">
+          {/* Form or Success Message */}
+          <div className="w-full p-4 sm:p-6 md:p-8">
             {isSubmitted ? (
               // Success View
-              <div className="flex flex-col items-center justify-center h-full text-center py-8">
+              <div className="flex flex-col items-center justify-center text-center py-6 sm:py-8">
                 {/* Success Icon */}
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                  <svg className="w-8 h-8 sm:w-10 sm:h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
 
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
                   Request Received!
                 </h3>
 
-                <p className="text-gray-700 mb-6 text-base max-w-md">
+                <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base px-4">
                   Our career counseling team will reach out to you within the next 24 hours.
                 </p>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 max-w-md">
-                  <p className="text-sm text-gray-700 mb-3">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 w-full">
+                  <p className="text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3">
                     Meanwhile, explore our Career Roadmap Tool to benchmark your profile and get insights for top companies.
                   </p>
                   <a
                     href="https://www.scaler.com/career-plan"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-scaler-blue hover:bg-scaler-blue-dark text-white text-center py-3 rounded font-semibold transition-colors"
+                    className="block w-full bg-scaler-blue hover:bg-scaler-blue-dark text-white text-center py-2.5 sm:py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base"
                   >
                     Try Career Roadmap Tool
                   </a>
@@ -187,7 +187,7 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
 
                 <button
                   onClick={onClose}
-                  className="text-scaler-blue hover:text-scaler-blue-dark font-medium text-sm"
+                  className="text-scaler-blue hover:text-scaler-blue-dark font-medium text-xs sm:text-sm"
                 >
                   Close
                 </button>
@@ -195,47 +195,47 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
             ) : (
               // Form View
               <>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
                   Start Your Journey
                 </h3>
-                <p className="text-gray-600 mb-6 text-sm">Get a free 1:1 career counseling session</p>
+                <p className="text-gray-600 mb-4 sm:mb-6 text-xs sm:text-sm">Get a free 1:1 career counseling session</p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Email ID <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   required
                   placeholder="your.email@example.com"
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none text-sm"
+                  className="w-full px-2.5 sm:px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-xs sm:text-sm"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Full Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     placeholder="John Doe"
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none text-sm"
+                    className="w-full px-2.5 sm:px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-xs sm:text-sm"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Graduation Year <span className="text-red-500">*</span>
                   </label>
                   <select
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none text-sm"
+                    className="w-full px-2.5 sm:px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-xs sm:text-sm"
                     value={formData.graduationYear}
                     onChange={(e) => setFormData({ ...formData, graduationYear: e.target.value })}
                   >
@@ -247,14 +247,14 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Job Title <span className="text-red-500">*</span>
                   </label>
                   <select
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none text-sm"
+                    className="w-full px-2.5 sm:px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-xs sm:text-sm"
                     value={formData.jobTitle}
                     onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
                   >
@@ -287,12 +287,12 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                     Program <span className="text-red-500">*</span>
                   </label>
                   <select
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none text-sm"
+                    className="w-full px-2.5 sm:px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-xs sm:text-sm"
                     value={formData.program}
                     onChange={(e) => setFormData({ ...formData, program: e.target.value })}
                   >
@@ -306,11 +306,11 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Mobile Number <span className="text-red-500">*</span>
                 </label>
                 <div className="flex">
-                  <span className="inline-flex items-center px-3 border border-r-0 border-gray-300 bg-gray-50 text-gray-600 text-sm rounded-l">
+                  <span className="inline-flex items-center px-2 sm:px-3 border border-r-0 border-gray-300 bg-gray-50 text-gray-600 text-xs sm:text-sm rounded-l-lg">
                     +91
                   </span>
                   <input
@@ -318,14 +318,14 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
                     required
                     placeholder="9876543210"
                     pattern="[0-9]{10}"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-r focus:border-blue-500 focus:outline-none text-sm"
+                    className="flex-1 px-2.5 sm:px-3 py-2 border border-gray-300 rounded-r-lg focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none text-xs sm:text-sm"
                     value={formData.mobile}
                     onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
                   />
                 </div>
               </div>
 
-              <p className="text-xs text-gray-500">
+              <p className="text-[10px] sm:text-xs text-gray-500">
                 By continuing, I agree to Scaler's{' '}
                 <a href="https://www.scaler.com/terms" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Terms</a>
                 {' '}and{' '}
@@ -335,7 +335,7 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 rounded transition-colors"
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-2.5 sm:py-3 rounded-lg transition-colors text-sm sm:text-base"
               >
                 {isSubmitting ? 'SUBMITTING...' : 'GET STARTED'}
               </button>
